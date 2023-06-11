@@ -4,6 +4,14 @@ const insertionSort = (arr: Array<number>): Array<number> => {
     const i = sortedUpTo + 1;
     const elemToSort = arr[i];
 
+    // Short circuit cases where the elemToSort is already in the place it needs to be.
+    if (elemToSort >= arr[sortedUpTo]) {
+      sortedUpTo += 1;
+      continue;
+    }
+
+    // Otherwise, if the sublist arr[0:sortedUpTo] is sorted, and elemToSort < arr[sortedUpTo],
+    // then there must be some place inside the sublist where elemToSort belongs. Find it.
     let belongsAt = -1;
     for (let j = 0; j <= sortedUpTo; j++) {
       const sortedElem = arr[j];
@@ -12,13 +20,9 @@ const insertionSort = (arr: Array<number>): Array<number> => {
         break;
       }
     }
-    // If we never set belongsAt, elemToSort is larger than all the elements in
-    // the sorted sublist, and so it belongs at the end of it.
-    // Fortunately, the element started at the end of the sorted sublist, so
-    // we don't have to do anything
+
     if (belongsAt === -1) {
-      sortedUpTo += 1;
-      continue;
+      throw new Deno.errors.InvalidData("insertion_sort/main.ts :: belongsAt has invalid value")
     }
 
     arr.splice(i, 1); // Remove elem from current position
@@ -28,8 +32,5 @@ const insertionSort = (arr: Array<number>): Array<number> => {
   }
   return arr;
 }
-
-insertionSort([3, 2, 1])
-
 
 export default insertionSort;
