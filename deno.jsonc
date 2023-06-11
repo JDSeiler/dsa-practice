@@ -1,0 +1,14 @@
+{
+  "imports": {
+    "testing/": "https://deno.land/std@0.191.0/testing/"
+  },
+  "tasks": {
+    "dev": "deno run --watch main.ts"
+  },
+  "lint": {
+    "include": ["src/"]
+  },
+  "fmt": {
+    "include": ["src/"]
+  }
+}
