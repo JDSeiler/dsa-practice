@@ -21,12 +21,6 @@ const insertionSort = (arr: number[]): number[] => {
       }
     }
 
-    if (belongsAt === -1) {
-      throw new Deno.errors.InvalidData(
-        "insertion_sort/main.ts :: belongsAt has invalid value",
-      );
-    }
-
     arr.splice(i, 1); // Remove elem from current position
     arr.splice(belongsAt, 0, elemToSort); // Insert it at desired position
 
