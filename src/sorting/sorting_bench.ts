@@ -25,3 +25,13 @@ Deno.bench("Array#sort", { group: "bubble_sort" }, () => {
   const input = [...LARGE_INPUT];
   input.sort();
 });
+
+Deno.bench("selectionSort", { group: "selection_sort", baseline: true }, () => {
+  const input = [...LARGE_INPUT];
+  bubbleSort(input);
+});
+
+Deno.bench("Array#sort", { group: "selection_sort" }, () => {
+  const input = [...LARGE_INPUT];
+  input.sort();
+});

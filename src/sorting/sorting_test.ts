@@ -3,6 +3,7 @@ import { describe, it } from "testing/bdd.ts";
 import { isSorted, randArrayOfSize } from "./common.ts";
 import insertionSort from "./insertion_sort/main.ts";
 import bubbleSort from "./bubble_sort/main.ts";
+import selectionSort from "./selection_sort/main.ts";
 
 type TestCase = StaticTestCase | DynamicTestCase;
 interface StaticTestCase {
@@ -69,6 +70,7 @@ const COMMON_TEST_CASES: TestCase[] = [
 const ALGORITHMS: Record<string, (a: number[]) => number[]> = {
   "Insertion Sort": insertionSort,
   "Bubble Sort": bubbleSort,
+  "Selection Sort": selectionSort,
 };
 
 const executeCommonTests = () => {
