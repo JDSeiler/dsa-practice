@@ -1,4 +1,4 @@
-const insertionSort = (arr: Array<number>): Array<number> => {
+const insertionSort = (arr: number[]): number[] => {
   let sortedUpTo = 0; // assume the first element is sorted
   while (sortedUpTo < arr.length - 1) {
     const i = sortedUpTo + 1;
