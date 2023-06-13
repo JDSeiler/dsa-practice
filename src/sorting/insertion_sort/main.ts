@@ -1,6 +1,6 @@
 const insertionSort = (arr: Array<number>): Array<number> => {
   let sortedUpTo = 0; // assume the first element is sorted
-  while (sortedUpTo < arr.length-1) {
+  while (sortedUpTo < arr.length - 1) {
     const i = sortedUpTo + 1;
     const elemToSort = arr[i];
 
@@ -22,7 +22,9 @@ const insertionSort = (arr: Array<number>): Array<number> => {
     }
 
     if (belongsAt === -1) {
-      throw new Deno.errors.InvalidData("insertion_sort/main.ts :: belongsAt has invalid value")
+      throw new Deno.errors.InvalidData(
+        "insertion_sort/main.ts :: belongsAt has invalid value",
+      );
     }
 
     arr.splice(i, 1); // Remove elem from current position
@@ -31,6 +33,6 @@ const insertionSort = (arr: Array<number>): Array<number> => {
     sortedUpTo += 1;
   }
   return arr;
-}
+};
 
 export default insertionSort;
