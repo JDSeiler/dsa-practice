@@ -1,9 +1,9 @@
 import linearSearch from "../linear_search/main.ts";
-import { binarySearchRecursive, binarySearchLooping } from "./main.ts";
+import { binarySearchLooping, binarySearchRecursive } from "./main.ts";
 
 const BIG_ARRAY: number[] = [];
-const BIG_ARRAY_SIZE = 2000000
-for (let i=0; i<=BIG_ARRAY_SIZE; i++) {
+const BIG_ARRAY_SIZE = 2000000;
+for (let i = 0; i <= BIG_ARRAY_SIZE; i++) {
   if (i % 2 === 0) {
     BIG_ARRAY.push(i);
   }
@@ -11,17 +11,25 @@ for (let i=0; i<=BIG_ARRAY_SIZE; i++) {
 
 /*
 For large-ish arrays (2 million elements):
-Array#indexOf is freakishly fast *until* the array becomes very large (20 million elements)
-at which point something happens and performance degrades. At 2 million elements the performance
-is comparable to the binary search implementations, but a bit slower.
+At 2 million elements the performance of Array#indexOf is comparable to the
+binary search implementations, but is a bit slower overall.
+
+In general Array#indexOf is freakishly fast *until* the array becomes very large
+(20 million elements) at which point something happens and performance degrades.
+My suspicion is that at 20 million elements the array can no longer fit in L2
+cache and the performance tanks. 20 million * 8 bytes per number = 160 megabytes,
+which is way bigger than the L2 cache on this chip. 16 Megs will fit in L2 though.
+The data fitting in L2 + sequential read + native code == very speedy.
+The binary searches have random memory access for the start, so maybe they are
+not as impacted by cache timing?
 
 Plain ole' linear search is better than findIndex. Presumably because function
 calls are expensive. This is further evidenced by the looping variant of binary
 search being ~25% faster. All by removing literally just a few dozen function calls.
 
 For small arrays (under 200,000!!):
-Array#indexOf is, again, freakishly fast. Way faster than the alternatives.
-It's not clear if this is native code speedup, or if it has some very clever algorithm.
+Array#indexOf is, again, freakishly fast. Way faster than the alternatives, even just
+a normal loop via linearSearch!
 
 **SUSPICION**
 I think the custom binary search may perform much better if we were searching over an array
