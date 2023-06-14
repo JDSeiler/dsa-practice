@@ -4,6 +4,7 @@ import { isSorted, randArrayOfSize } from "./common.ts";
 import insertionSort from "./insertion_sort/main.ts";
 import bubbleSort from "./bubble_sort/main.ts";
 import selectionSort from "./selection_sort/main.ts";
+import mergeSort from "./merge_sort/main.ts";
 
 type TestCase = StaticTestCase | DynamicTestCase;
 interface StaticTestCase {
@@ -71,6 +72,7 @@ const ALGORITHMS: Record<string, (a: number[]) => number[]> = {
   "Insertion Sort": insertionSort,
   "Bubble Sort": bubbleSort,
   "Selection Sort": selectionSort,
+  "Merge Sort": mergeSort,
 };
 
 const executeCommonTests = () => {
