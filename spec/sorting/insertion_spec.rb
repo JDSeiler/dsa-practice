@@ -1,5 +1,6 @@
 require 'rspec'
 require_relative '../../util'
+require_relative '../../src/sorting/insertion'
 
 describe '#insertion_sort' do
   let(:unsorted) { random_ints }
@@ -13,7 +14,7 @@ describe '#insertion_sort' do
   end
 
   it 'correctly sorts arrays of integers in ascending order' do
-    expect(is_sorted?(insertion_sort(unsorted), :asc)).to be true
+    expect(sorted?(insertion_sort(unsorted), :asc)).to be true
   end
 
   context 'edge cases' do
