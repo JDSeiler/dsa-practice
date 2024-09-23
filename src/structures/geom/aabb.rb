@@ -4,30 +4,51 @@ require_relative './point_2d'
 
 # Axis-Aligned Bounding Box
 class AABB
-  attr_accessor :center, :half_dim
+  attr_accessor :center, :half_dim, :closed
 
   # - center (Point2D): The center point of the box
   # - half_dim (float): 1/2 the side-length of the box
-  def initialize(center, half_dim)
+  # - closed (boolean - optional): Defaults to `true` and controls whether
+  #   points on the edge of the AABB are considered "inside". "Open" boxes
+  #   include points on the edge, while "closed" boxes do not.
+  def initialize(center, half_dim, closed = true)
     @center = center
     @half_dim = half_dim
+    @closed = closed
   end
 
   def contains_point(p)
     diff_x = (center.x - p.x).abs
     diff_y = (center.y - p.y).abs
 
-    # Points on the line are a literal edge case I need to consider.
-    diff_x < @half_dim && diff_y < @half_dim
+    return diff_x < @half_dim && diff_y < @half_dim if closed
+
+    diff_x <= @half_dim && diff_y <= @half_dim
   end
 
   def intersects(other)
-    manhattan_distance(@center, other.center) < (2 * @half_dim + 2 * other.half_dim)
+    other_inside = other.corners.any? do |other_corner|
+      contains_point(other_corner)
+    end
+
+    self_inside = corners.any? do |own_corner|
+      other.contains_point(own_corner)
+    end
+
+    other_inside || self_inside
   end
 
-  private
-
-  def manhattan_distance(point_a, point_b)
-    (point_a.x - point_b.x).abs + (point_a.y - point_b.y).abs
+  def corners
+    transforms = [
+      [@half_dim, @half_dim],
+      [@half_dim, -@half_dim],
+      [-@half_dim, -@half_dim],
+      [@half_dim, @half_dim]
+    ]
+    transforms.map do |t|
+      tx = t[0]
+      ty = t[1]
+      Point2D.new(@center.x + tx, @center.y + ty)
+    end
   end
 end

@@ -13,4 +13,8 @@ class Point2D
   def ==(other)
     @x == other.x && @y == other.y
   end
+
+  def manhattan_distance(p)
+    (@x - p.x).abs + (@y - p.y).abs
+  end
 end
