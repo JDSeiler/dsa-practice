@@ -14,7 +14,11 @@ describe '#merge_sort' do
   end
 
   it 'correctly sorts arrays of integers in ascending order' do
-    expect(sorted?(merge_sort(unsorted), :asc)).to be true
+    output = merge_sort(unsorted)
+    expect(sorted?(output, :asc)).to be true
+    # Compare to the built in Ruby sort method to protect against
+    # Errors like dropping or duplicating elements
+    expect(output).to eq(unsorted.sort)
   end
 
   context 'edge cases' do
