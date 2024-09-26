@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def quicksort(arr)
   _quicksort(arr, 0, arr.size - 1)
   arr
@@ -20,7 +22,7 @@ def _partition(arr, s, e)
 
   pivot = arr[e]
   dest = s - 1
-  for to_check in s..e - 1
+  (s..e - 1).each do |to_check|
     if arr[to_check] <= pivot
       dest += 1
       _exchange(arr, dest, to_check)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def merge_sort(arr)
   return arr if arr.length <= 1
 

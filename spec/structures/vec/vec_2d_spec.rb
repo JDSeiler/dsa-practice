@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec'
 require_relative '../../../src/structures/vec/vec_2d'
 

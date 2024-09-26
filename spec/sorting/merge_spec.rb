@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec'
 require_relative '../../util'
 require_relative '../../src/sorting/merge'

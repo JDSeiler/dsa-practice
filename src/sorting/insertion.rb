@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def insertion_sort(arr)
   return [] if arr.empty?
   return [arr[0]] if arr.length == 1
