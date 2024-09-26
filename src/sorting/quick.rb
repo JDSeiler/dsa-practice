@@ -15,7 +15,7 @@ end
 # This is the randomized pivot algorithm from CLRS
 # It is slightly magical
 def _partition(arr, s, e)
-  random_pivot = [*s..e].sample
+  random_pivot = rand(s..e)
   _exchange(arr, random_pivot, e)
 
   pivot = arr[e]
