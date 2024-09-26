@@ -1,8 +1,9 @@
 def merge_sort(arr)
   return arr if arr.length <= 1
 
-  left = arr.slice(0, arr.length.div(2))
-  right = arr.slice(arr.length.div(2), arr.length)
+  mid = arr.length / 2
+  left = arr.slice(0, mid)
+  right = arr.slice(mid, arr.length)
 
   _merge(
     merge_sort(left),
