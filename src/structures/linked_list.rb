@@ -100,7 +100,10 @@ class LinkedList
     # Case 2: 1 element
     # `rest` returns nil if @head is nil, but that would be invalid for this method which
     # is why we have the check for `empty?` up top.
-    return rest if idx == 0
+    if idx == 0
+      @head = @head.succ
+      return self
+    end
 
     # Case 3: 2 or more elements
     # Technically this will give a misleading error if we try to remove some far off index.
@@ -114,6 +117,7 @@ class LinkedList
     pred.succ = after_remove
     # Attempt to help the garbage collector
     to_remove = nil
+    self
   end
 
   def concat(other)
